@@ -24,10 +24,11 @@ Route::group([
     ], 
     function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+    
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    
 
     //     // Verify email
     // Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
@@ -40,13 +41,24 @@ Route::group([
     // return back()->with('message', 'Verification link sent!');
     // })->middleware(['auth:api', 'throttle:6,1'])->name('verification.send');
 
-    Route::get('/pengaduans', [PengaduanController::class, 'index']);
-    Route::get('/pengaduans/{id}', [PengaduanController::class, 'show']);
-    Route::post('/pengaduans', [PengaduanController::class, 'store']);
-    Route::put('/pengaduans/{id}', [PengaduanController::class, 'update_proses']);
-    Route::delete('/pengaduans/{id}', [PengaduanController::class, 'destroy']);
-    Route::post('/pengaduankomens/{id}', [PengaduanKomenController::class, 'store']);
-    Route::get('/pengaduankomens', [PengaduanKomenController::class, 'index']);
-    Route::get('/pengaduankomens/{id}', [PengaduanController::class, 'showkomen']);
+    
     }
+
+);
+    Route::group([
+        'middleware' => 'api'
+    
+        ], 
+        function ($router) {
+            Route::post('/register', [AuthController::class, 'register']);
+            Route::get('/pengaduans', [PengaduanController::class, 'index']);
+            Route::get('/pengaduans/{id}', [PengaduanController::class, 'show']);
+            Route::post('/pengaduans', [PengaduanController::class, 'store']);
+            Route::put('/pengaduansproses/{id}', [PengaduanController::class, 'update_proses']);
+            Route::put('/pengaduansclose/{id}', [PengaduanController::class, 'update_close']);
+            Route::delete('/pengaduans/{id}', [PengaduanController::class, 'destroy']);
+            Route::post('/pengaduankomens/{id}', [PengaduanKomenController::class, 'store']);
+            Route::get('/pengaduankomens', [PengaduanKomenController::class, 'index']);
+            Route::get('/pengaduankomens/{id}', [PengaduanController::class, 'showkomen']);
+        }
 );

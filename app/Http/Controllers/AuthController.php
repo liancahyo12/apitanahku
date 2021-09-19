@@ -5,7 +5,10 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Admin;
 use Validator;
+// Use Auth;
+
 
 
 class AuthController extends Controller
@@ -30,16 +33,51 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
+        
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // $role = Auth::user()->role;
+        // if($role == 2){
+        //     if (! $token = auth()->attempt($validator->validated())) {
+        //         return response()->json(['error' => 'Unauthorized'], 401);
+        //     }
+        // } else {
+        //     return redirect()->to('logout');
+        // }
+        $loginuser = auth()->guard('user')->attempt($validator->validated());
+        if (! $token = auth()->attempt($validator->validated())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->createNewToken_user($token);
+    }
+
+    public function login_admin(Request $request){
+    	$validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        // $role = Auth::user()->role;
+        // if($role == 2){
+        //     if (! $token = auth()->attempt($validator->validated())) {
+        //         return response()->json(['error' => 'Unauthorized'], 401);
+        //     }
+        // } else {
+        //     return redirect()->to('logout');
+        // }
 
-        return $this->createNewToken($token);
+        if (! $token = auth()->guard('admin')->attempt($validator->validated())) {
+            Session::flash('error', 'Email atau password salah');
+            return redirect()->route('login');
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -88,7 +126,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh() {
-        return $this->createNewToken(auth()->refresh());
+        return $this->createNewToken_refresh(auth()->refresh());
     }
 
     /**
@@ -107,13 +145,35 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token){
+    protected function createNewToken_user($token){
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 1440,
+            'user' => auth()->guard('user')->user()
+        ]);
+    }
+    protected function createNewToken_refresh($token){
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 1440,
             'user' => auth()->user()
         ]);
     }
 
+    public function showFormLogin()
+    {
+        if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
+            //Login Success
+            return redirect()->route('home');
+        }
+        return view('login');
+    }
+    
+    public function logoutadmin()
+    {
+        Auth::logout(); // menghapus session yang aktif
+        return redirect()->route('login');
+    }
 }
