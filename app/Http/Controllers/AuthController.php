@@ -31,7 +31,7 @@ class AuthController extends Controller
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
         ]);
         
         if ($validator->fails()) {
@@ -48,7 +48,7 @@ class AuthController extends Controller
         // }
         $loginuser = auth()->guard('user')->attempt($validator->validated());
         if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Email atau password salah'], 401);
         }
 
         return $this->createNewToken_user($token);
