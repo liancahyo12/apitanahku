@@ -29,7 +29,16 @@
           {{ session('loginError') }}
         </div>
       @endif
-
+      @if(session()->has('prosesError'))
+      <div class="alert alert-danger alert-dismissable fade show" role="alert">
+        {{ session('prosesError') }}
+      </div>
+    @endif
+    @if(session()->has('prosesBerhasil'))
+      <div class="alert alert-success alert-dismissable fade show" role="alert">
+        {{ session('prosesBerhasil') }}
+      </div>
+    @endif
       <form action="/login" method="post">
         @csrf
         <div class="input-group mb-3">

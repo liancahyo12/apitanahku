@@ -2,6 +2,16 @@
 
 @section('container-head')
 <div class="container-fluid">
+  @if(session()->has('prosesError'))
+      <div class="alert alert-danger alert-dismissable fade show" role="alert">
+        {{ session('prosesError') }}
+      </div>
+    @endif
+    @if(session()->has('prosesBerhasil'))
+      <div class="alert alert-success alert-dismissable fade show" role="alert">
+        {{ session('prosesBerhasil') }}
+      </div>
+    @endif
   <div class="row mb-2">
     <div class="col-sm-6">
       <h1 class="m-0">Pengaduan</h1>
