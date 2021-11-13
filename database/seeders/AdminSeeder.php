@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
     {
         //
         DB::table('admins')->insert([
-            'name' => 'Admin',
+            'admin_name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'created_at' => \Carbon\Carbon::now(),

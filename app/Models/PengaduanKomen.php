@@ -9,7 +9,7 @@ class PengaduanKomen extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'komen'
+        'komen', 'pengaduan_id', 'admin_id'
     ];
     public function pengaduan()
     {

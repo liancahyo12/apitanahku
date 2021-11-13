@@ -16,7 +16,8 @@ class CreatePengaduanKomensTable extends Migration
         Schema::create('pengaduan_komens', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('admin_id')->nullable();
             $table->unsignedInteger('pengaduan_id');
             $table->string('komen');
             $table->tinyInteger('status')->default('1');
