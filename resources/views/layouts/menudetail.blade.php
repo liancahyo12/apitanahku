@@ -114,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Loket Tanahku
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 <a href="https://adminlte.io">lokettenah.com</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 <a href="https://lokettanah.com">lokettenah.com</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

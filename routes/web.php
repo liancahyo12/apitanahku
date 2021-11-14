@@ -40,7 +40,7 @@ Route::post('/pengaduan/balas/{pengaduan:id}',[HomeController::class, 'balas']);
 Route::put('/pengaduan/proses/{pengaduan:id}',[HomeController::class, 'update_proses']);
 Route::put('/pengaduan/selesaikan/{pengaduan:id}',[HomeController::class, 'update_close']);
 Route::get('/',[AdminController::class, 'dashboardAdmin']);
-Route::get('/home',[HomeController::class, 'dashboardAdmin']);
+Route::get('/home',[HomeController::class, 'dashboardAdmin'])->name('home');
 Route::get('/login',[AdminController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login',[AdminController::class, 'login']);
 Route::post('/logout',[AdminController::class, 'logout']);

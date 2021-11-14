@@ -25,7 +25,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Pengaduan Baru</span>
-          <span class="info-box-number">41</span>
+          <span class="info-box-number">{{ $countnew }}</span>
           <!-- <span class="info-box-number">
             10
             <small>%</small>
@@ -42,7 +42,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Total Pengaduan</span>
-          <span class="info-box-number">4141</span>
+          <span class="info-box-number">{{ $countall }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -59,7 +59,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Pengaduan Selesai</span>
-          <span class="info-box-number">760</span>
+          <span class="info-box-number">{{ $countdone }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -72,7 +72,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Total Pengguna</span>
-          <span class="info-box-number">2,000</span>
+          <span class="info-box-number">{{ $countuser }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>

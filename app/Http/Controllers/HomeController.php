@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
+use App\Models\User;
 use App\Models\PengaduanKomen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,8 +33,17 @@ class HomeController extends Controller
 
     public function dashboardAdmin()
     {
+        $countnew = Pengaduan::where('case_status', 1)->get()->count();
+        $countall = Pengaduan::get()->count();
+        $countdone = Pengaduan::where('case_status', 3)->get()->count();
+        $countuser = User::get()->count();
+
         if(Auth::guard('admin')->check()){
-            return view('home');
+            return view('home')
+            ->with(compact('countnew'))
+            ->with(compact('countall'))
+            ->with(compact('countdone'))
+            ->with(compact('countuser'));
         }
   
         return redirect("login")->with('prosesError', 'Silahkan login terlebih dahulu');
@@ -43,6 +53,7 @@ class HomeController extends Controller
     {
         if(Auth::guard('admin')->check()){
             $pengaduan = Pengaduan::leftJoin('users', 'pengaduans.user_id', '=', 'users.id')->select('pengaduans.*', 'users.name')->get();
+            
 
             // return view('daftarpengaduan', [
             //     'pengaduan' => Pengaduan::all()
