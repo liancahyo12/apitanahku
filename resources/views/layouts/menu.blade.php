@@ -40,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a class="dropdown-item" href="#">
           <i class="fas fa-key"></i> Ubah Password</a>
           <div class="dropdown-divider"></div>
-          <form action="/logout" method="POST">
+          <form action="/logout" method="GET">
             @csrf
             <button type="submit" class="dropdown-item">
               <i class="fas fa-sign-out-alt"></i> Logout
