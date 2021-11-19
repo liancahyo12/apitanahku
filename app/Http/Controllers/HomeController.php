@@ -160,5 +160,8 @@ class HomeController extends Controller
         return redirect("login")->with('prosesError', 'Silahkan login terlebih dahulu');
         
     }
-
+    public function error404()
+    {
+        return view('errors.404');
+    }
 }

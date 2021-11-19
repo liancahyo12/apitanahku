@@ -162,4 +162,13 @@ class PengaduanController extends Controller
             ], 500);
         }
     }
+
+    public function unduhform()
+    {
+    	$filePath = public_path("form.pdf");
+    	$headers = ['Content-Type: application/pdf'];
+    	$fileName = time().'.pdf';
+
+    	return response()->download($filePath, $fileName, $headers);
+    }
 }

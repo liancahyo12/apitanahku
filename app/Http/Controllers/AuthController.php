@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Admin;
 use Validator;
@@ -98,7 +99,7 @@ class AuthController extends Controller
 
         $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password)]
+                    ['password' => Hash::make($request->password)]
                 ));
         // event(new Registered($user));
         return response()->json([
@@ -120,6 +121,30 @@ class AuthController extends Controller
         return response()->json(['message' => 'User successfully signed out']);
     }
 
+    public function ubahpassword(Request $request)
+    {
+        $user = Auth::user();
+    
+            $userPassword = $user->password;
+            
+            $validator = Validator::make($request->all(), [
+                'current_password' => 'required',
+                'password' => 'required|same:confirm_password|min:8',
+                'confirm_password' => 'required',
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors()->toJson(), 400);
+            }
+            if (!Hash::check($request->current_password, $userPassword)) {
+                return response()->json(['message' => 'password not match']);
+            }
+
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+
+            return response()->json(['message' => 'password berhasil diubah']);
+    }
     /**
      * Refresh a token.
      *

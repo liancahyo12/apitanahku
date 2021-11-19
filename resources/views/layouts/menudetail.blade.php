@@ -37,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <i class="fas fa-caret-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="/ubahpassword">
           <i class="fas fa-key"></i> Ubah Password</a>
           <div class="dropdown-divider"></div>
           <form action="/logout" method="GET">

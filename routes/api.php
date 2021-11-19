@@ -24,7 +24,7 @@ Route::group([
     ], 
     function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    
+    Route::post('/ubahpassword', [AuthController::class, 'ubahpassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
@@ -50,8 +50,10 @@ Route::group([
     
         ], 
         function ($router) {
+            
             Route::post('/register', [AuthController::class, 'register']);
             Route::get('/pengaduans', [PengaduanController::class, 'index']);
+            Route::get('/unduhform', [PengaduanController::class, 'unduhform']);
             Route::get('/pengaduans/{id}', [PengaduanController::class, 'show']);
             Route::post('/pengaduans', [PengaduanController::class, 'store']);
             Route::put('/pengaduansproses/{id}', [PengaduanController::class, 'update_proses']);
