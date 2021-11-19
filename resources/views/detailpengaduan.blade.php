@@ -55,7 +55,7 @@
               <span class="direct-chat-timestamp float-right">{{ $komena->created_at }}</span>
             </div>
             <!-- /.direct-chat-infos -->
-            <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image">
+            <img class="direct-chat-img" src="../dist/img/usera128.jpg" alt="message user image">
             <!-- /.direct-chat-img -->
             <div class="direct-chat-text">
               {{ $komena->komen }}
@@ -72,7 +72,7 @@
               <span class="direct-chat-timestamp float-left">{{ $komena->created_at }}</span>
             </div>
             <!-- /.direct-chat-infos -->
-            <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image">
+            <img class="direct-chat-img" src="../dist/img/userb128.jpg" alt="message user image">
             <!-- /.direct-chat-img -->
             <div class="direct-chat-text">
               {{ $komena->komen }}
